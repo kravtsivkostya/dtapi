@@ -21,18 +21,12 @@ export class SubjectComponent implements OnInit {
   constructor(private appService: AppService) { }
 
   ngOnInit() {
-
     this.getSubject();
   }
   getSubject(): any {
-    // const action = 'getRecords'
-    // this.appService.getEntity(this.entity, action).subscribe((result) => {
-    //   this.Request = result;
-    //   console.log(result);
-    // });
     const action = 'getRecords'
     this.appService.getEntity(this.entity, action).subscribe((data: Subject[]) => this.subjectsArr = data)
-    }
+  }
   createSubject(SubjectForm): any {
     const action = 'insertData'
     const body = { subject_name: SubjectForm.subject_name, subject_description: SubjectForm.subject_description };
@@ -41,11 +35,7 @@ export class SubjectComponent implements OnInit {
   }
   delSubject(subject: Subject): any {
     const action = 'del'
-  //  this.subjectsArr = this.subjectsArr.filter(sub => sub !== subject);
-    this.appService.delEntity(this.entity, action, subject.subject_id).subscribe((data: Subject[]) => this.subjectsArr )
-    // const action = 'getRecords'
-    // this.appService.getEntity(this.entity, action).subscribe(data => this.Request = data)
-    // console.log(this.Request);
+    this.appService.delEntity(this.entity, action, subject.subject_id).subscribe((data: Subject[]) => this.subjectsArr)
     this.getSubject();
   }
 }

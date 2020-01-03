@@ -9,16 +9,16 @@ import { AppService } from 'src/app/services/api.service';
 })
 export class LoginComponent implements OnInit {
 
-  public LoginForm: FormGroup;
+  LoginForm = new FormGroup({
+    "username": new FormControl(),
+    "password": new FormControl(),
+  });
   public Request;
   public entity = 'login'
   constructor(private appService: AppService) { }
 
   ngOnInit() {
-    this.LoginForm = new FormGroup({
-      "username": new FormControl(),
-      "password": new FormControl(),
-    });
+
   }
   login(LoginForm): any {
     const body = { username: LoginForm.username, password: LoginForm.password };

@@ -9,29 +9,30 @@ import { Speciality } from './speciality';
   styleUrls: ['./speciality.component.css']
 })
 export class SpecialityComponent implements OnInit {
-
   SpecialityForm = new FormGroup({
     "speciality_code": new FormControl(),
     "speciality_name": new FormControl(),
   });
-  public subjectsArr = Speciality[] = [];;
+  public specialityArr: Speciality[] = [];;
   public entity = 'Speciality'
   constructor(private appService: AppService) { }
 
   ngOnInit() {
     this.getSpeciality();
   }
-
+  getSpeciality(): any {
+    const action = 'getRecords'
+    this.appService.getEntity(this.entity, action).subscribe((data: Speciality[]) => this.specialityArr = data)
+  }
   createSpeciality(SpecialityForm): any {
     const action = 'insertData'
     const body = { speciality_code: SpecialityForm.speciality_code, speciality_name: SpecialityForm.speciality_name };
-    this.appService.postEntity(this.entity, action, body).subscribe(data => this.Request = data)
-    console.log(this.Request);
+    this.appService.postEntity(this.entity, action, body).subscribe((data: Speciality[]) => this.specialityArr = data)
     this.getSpeciality()
   }
-  getSpeciality(): any {
-    const action = 'getRecords'
-    this.appService.getEntity(this.entity, action).subscribe(data => this.Request = data)
-    console.log(this.Request);
+  delSpeciality(speciality: Speciality): any {
+    const action = 'del'
+    this.appService.delEntity(this.entity, action, speciality.speciality_id).subscribe((data: Speciality[]) => this.specialityArr)
+    this.getSpeciality();
   }
 }

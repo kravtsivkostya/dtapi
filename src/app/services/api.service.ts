@@ -6,14 +6,19 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AppService {
 
+  apiURI = "http://dtapi.if.ua";
   constructor(private http: HttpClient) { }
 
-  login(LoginForm) {
-    const body = { username:LoginForm.username , password: LoginForm.password};
-    return this.http.post('http://dtapi.if.ua/login/index', body);
+  getEntity(entity, action) {
+    const url = `${this.apiURI}/${entity}/${action}`;
+    return this.http.get(url);
   }
-  subjectCreate(SubjectForm) { 
-    const body = { subject_name: SubjectForm.subject_name , subject_description: SubjectForm.subject_description};
-    return this.http.post('http://dtapi.if.ua/Subject/insertData/', body);
+  postEntity(entity, action, body) {
+    const url = `${this.apiURI}/${entity}/${action}`;
+    return this.http.post(url, body);
+  }
+  delEntity(entity, action, id) {
+    const url = `${this.apiURI}/${entity}/${action}/${id}`;
+    return this.http.get(url);
   }
 }

@@ -1,16 +1,42 @@
-
-<form [formGroup]="SubjectForm" (ngSubmit)="createSubject(SubjectForm.value)">
+<form #SubjectForm="ngForm"  (ngSubmit)="createSubject(SubjectForm.value)">
 
     <div class="container">
         <div class="form-group">
 
             <label for="subject_name"><b>Subject Name</b></label>
-            <input type="text"class="form-control" placeholder="Enter Subject Name" formControlName="subject_name" name="subject_name" required>
+            <input type="text" class="form-control" placeholder="Enter Subject Name" [(ngModel)]="subject_name"
+                name="subject_name" required>
 
             <label for="subject_description"><b>Subject Desription</b></label>
-            <input type="text" class="form-control" placeholder="Enter Desription for Subject"  formControlName="subject_description" name="subject_description" required>
+            <input type="text" class="form-control" placeholder="Enter Desription for Subject"
+                [(ngModel)]="subject_description" name="subject_description" required>
 
             <button type="submit" class="btn btn-success btn-md">Submit</button>
         </div>
     </div>
 </form>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID </th>
+            <th>Desciption</th>
+            <th>Code</th>
+            <th>Name</th>
+        </tr>
+    </thead>
+
+    <tr *ngFor="let subject of subjectsArr; let i =index;">
+
+        <td class="td-margin">{{i}}</td>
+        <td class="td-margin">Спеціальність:</td>
+        <td class="td-margin">{{subject.subject_name}}</td>
+        <td class="td-margin">{{subject.subject_description}}</td>
+        <td>
+            <button class="btn btn-success btn-sm" title="delete subject" (click)="delSubject(subject)">
+                x
+            </button>
+        </td>
+
+    </tr>
+</table>

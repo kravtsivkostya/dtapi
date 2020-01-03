@@ -1,0 +1,34 @@
+<form #SpecialityForm="ngForm"  (ngSubmit)="createSpeciality(SpecialityForm.value)">
+
+    <div class="container">
+        <div class="form-group">
+
+            <label for="speciality_code"><b>Speciality Code</b></label>
+            <input type="text" class="form-control" placeholder="Enter Speciality Code"
+            [(ngModel)]="speciality_code" name="speciality_code" required>
+
+            <label for="speciality_name"><b>Speciality Name</b></label>
+            <input type="text" class="form-control" placeholder="Enter Speciality Name"
+            [(ngModel)]="speciality_name" name="speciality_name" required>
+
+            <button type="submit" class="btn btn-success btn-md">Submit</button>
+        </div>
+    </div>
+</form>
+<!-- <button (click) = "getSpeciality($event)">Click Me</button> -->
+<table>
+    <thead>
+        <tr>
+            <th>ID </th>
+            <th>Desciption</th>
+            <th>Code</th>
+            <th>Name</th>
+        </tr>
+    </thead>
+    <tr *ngFor="let speciality of Request; let i =index;">
+        <td class="td-margin">{{i}}</td>
+        <td class="td-margin">Спеціальність:</td>
+        <td class="td-margin">{{speciality.speciality_code}}</td>
+        <td class="td-margin">{{speciality.speciality_name}}</td>
+    </tr>
+</table>

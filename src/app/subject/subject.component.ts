@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
-import { FormBuilder, FormGroup, FormControl } from '@angular/forms'
+import { FormGroup, FormControl } from '@angular/forms'
 import { AppService } from 'src/app/services/api.service';
+import { Subject } from './subject';
+
 
 @Component({
   selector: 'app-subject',
@@ -10,21 +11,41 @@ import { AppService } from 'src/app/services/api.service';
 })
 export class SubjectComponent implements OnInit {
 
-  public SubjectForm: FormGroup;
-  public json;
-  constructor(private formBuilder: FormBuilder, private appService: AppService) { }
+  public subjectsArr: Subject[] = [];
+  public entity = 'Subject'
+  SubjectForm = new FormGroup({
+    "subject_name": new FormControl(),
+    "subject_description": new FormControl(),
+  });
+
+  constructor(private appService: AppService) { }
 
   ngOnInit() {
-    this.SubjectForm = this.formBuilder.group({
-      "subject_name": new FormControl(),
-      "subject_description": new FormControl(),
-    });
+
+    this.getSubject();
   }
-
+  getSubject(): any {
+    // const action = 'getRecords'
+    // this.appService.getEntity(this.entity, action).subscribe((result) => {
+    //   this.Request = result;
+    //   console.log(result);
+    // });
+    const action = 'getRecords'
+    this.appService.getEntity(this.entity, action).subscribe((data: Subject[]) => this.subjectsArr = data)
+    }
   createSubject(SubjectForm): any {
-    console.log(SubjectForm);
-    this.appService.subjectCreate(SubjectForm).subscribe(data => this.json = data)
-    // console.log(this.json);
-
+    const action = 'insertData'
+    const body = { subject_name: SubjectForm.subject_name, subject_description: SubjectForm.subject_description };
+    this.appService.postEntity(this.entity, action, body).subscribe((data: Subject[]) => this.subjectsArr = data)
+    this.getSubject();
+  }
+  delSubject(subject: Subject): any {
+    const action = 'del'
+  //  this.subjectsArr = this.subjectsArr.filter(sub => sub !== subject);
+    this.appService.delEntity(this.entity, action, subject.subject_id).subscribe((data: Subject[]) => this.subjectsArr )
+    // const action = 'getRecords'
+    // this.appService.getEntity(this.entity, action).subscribe(data => this.Request = data)
+    // console.log(this.Request);
+    this.getSubject();
   }
 }

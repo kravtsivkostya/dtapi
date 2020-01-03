@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
-import { FormBuilder, FormGroup, FormControl } from '@angular/forms'
+import { FormGroup, FormControl } from '@angular/forms'
 import { AppService } from 'src/app/services/api.service';
 
 @Component({
@@ -11,23 +10,27 @@ import { AppService } from 'src/app/services/api.service';
 export class LoginComponent implements OnInit {
 
   public LoginForm: FormGroup;
-  public response;
-  constructor(private formBuilder: FormBuilder, private appService: AppService) { }
+  public Request;
+  public entity = 'login'
+  constructor(private appService: AppService) { }
 
   ngOnInit() {
-    this.LoginForm = this.formBuilder.group({
+    this.LoginForm = new FormGroup({
       "username": new FormControl(),
       "password": new FormControl(),
     });
   }
+  login(LoginForm): any {
+    const body = { username: LoginForm.username, password: LoginForm.password };
+    const action = 'index'
+    this.appService.postEntity(this.entity, action, body).subscribe(data => this.Request = data)
+    console.log(this.Request);
 
-  sendLogin(LoginForm): any {
-    console.log(LoginForm);
-    this.appService.login(LoginForm).subscribe(data => this.response = data)
-    console.log(this.response);
-    // console.log('this is responce'+ this.response.response);
-    if (this.response.response == "ok") {
-      document.getElementById('test').style.display = "none"
-    }
+    // if (this.Request.response == "ok") {
+    //   document.getElementById('test').style.display = "none"
+
+    //   document.getElementById('test').style.display = "block"
+
+    // }
   }
 }

@@ -18,7 +18,11 @@ export class LoginComponent implements OnInit {
   constructor(private appService: AppService) { }
 
   ngOnInit() {
-
+  this.loginCheck();
+  }
+  loginCheck(): any{
+    const action = 'isLogged';
+    this.appService.getEntity(this.entity,action).subscribe(data => console.log(data));
   }
   login(LoginForm): any {
     const body = { username: LoginForm.username, password: LoginForm.password };

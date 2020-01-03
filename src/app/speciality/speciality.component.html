@@ -19,14 +19,12 @@
 <table>
     <thead>
         <tr>
-            <th>ID </th>
             <th>Desciption</th>
             <th>Code</th>
             <th>Name</th>
         </tr>
     </thead>
-    <tr *ngFor="let speciality of specialityArr; let i =index;">
-        <td class="td-margin">{{i}}</td>
+    <tr *ngFor="let speciality of specialityArr">
         <td class="td-margin">Спеціальність:</td>
         <td class="td-margin">{{speciality.speciality_code}}</td>
         <td class="td-margin">{{speciality.speciality_name}}</td>

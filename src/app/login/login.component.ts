@@ -10,7 +10,10 @@ import { AppService } from 'src/app/services/api.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
+  public loginObj = {
+    username: "",
+    password: ""
+  }
   LoginForm = new FormGroup({
     username: new FormControl(),
     password: new FormControl(),
@@ -29,7 +32,9 @@ export class LoginComponent implements OnInit {
     this.appService.postEntity(this.entity, action, body).subscribe(data => {
       this.Request = data;
       if (this.Request.response === 'ok') {
-        window.location.href = '/speciality';
+        // window.location.href = '/speciality';
+        // for github pages 
+        window.location.href = window.location.hostname + '/dtapi/speciality';
       }
     });
   }

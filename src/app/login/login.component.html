@@ -5,11 +5,11 @@
             <div class="form-group">
 
                 <label for="username"><b>Username</b></label>
-                <input type="text" class="form-control" placeholder="Enter Username" [(ngModel)]="username"
+                <input type="text" class="form-control" placeholder="Enter Username" [(ngModel)]="loginObj.username"
                     name="username" required>
 
                 <label for="password"><b>Password</b></label>
-                <input type="password" class="form-control" placeholder="Enter Password" [(ngModel)]="password"
+                <input type="password" class="form-control" placeholder="Enter Password" [(ngModel)]="loginObj.password"
                     name="password" required>
 
                 <button type="submit" class="btn btn-success btn-md">Login</button>

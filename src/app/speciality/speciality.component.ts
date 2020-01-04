@@ -18,6 +18,11 @@ export class SpecialityComponent implements OnInit {
     speciality_name: new FormControl(),
   });
   public specialityArr: Speciality[] = [];
+  public specialityObj = {
+    speciality_id: null,
+    speciality_code: null,
+    speciality_name: null
+  };
   public entity = 'Speciality';
   public message;
   public Request: any;
@@ -26,9 +31,11 @@ export class SpecialityComponent implements OnInit {
     speciality_code: null,
     speciality_name: ' '
   };
+
   constructor(private appService: AppService) { }
 
   ngOnInit() {
+    // this.specialityArr =  [];
     this.loginCheck();
     this.getSpeciality();
   }

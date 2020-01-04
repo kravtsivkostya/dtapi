@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AppService {
 
-  apiURI = "http://dtapi.if.ua";
+  apiURI = 'http://dtapi.if.ua';
   constructor(private http: HttpClient) { }
 
   getEntity(entity, action) {

@@ -10,36 +10,35 @@ import { AppService } from '../services/api.service';
 
 export class NavbarComponent implements OnInit {
 
-  public entity: String;
-  public action: String;
+  public entity: string;
+  public action: string;
   public Request: any;
 
   constructor(private appService: AppService) { }
 
   ngOnInit() {
-    this.loginCheck()
+    this.loginCheck();
   }
   loginCheck(): any {
     const entity = 'login';
     const action = 'isLogged';
-    this.appService.getEntity(entity, action).subscribe((data: Object) => {
-      this.Request = data
+    this.appService.getEntity(entity, action).subscribe((data: object) => {
+      this.Request = data;
       console.log(this.Request);
-      if (this.Request.response == 'logged') {
-        console.log('you are logged')
-        document.getElementById('login').style.display = "none"
-        document.getElementById('logout').style.display = "block"
+      if (this.Request.response === 'logged') {
+        document.getElementById('login').style.display = 'none';
+        document.getElementById('logout').style.display = 'block';
       }
-      else if (this.Request.response == 'non logged') {
-        document.getElementById('login').style.display = "block"
-        document.getElementById('logout').style.display = "none"
+      if (this.Request.response === 'non logged') {
+        document.getElementById('login').style.display = 'block';
+        document.getElementById('logout').style.display = 'none';
       }
-    })
-  };
+    });
+  }
   logout() {
     const entity = 'login';
-    const action = 'logout'
+    const action = 'logout';
     this.appService.getEntity(entity, action).subscribe();
-    window.location.href = '/login'
+    window.location.href = '/login';
   }
 }

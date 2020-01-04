@@ -11,9 +11,9 @@ import { AppService } from 'src/app/services/api.service';
 })
 export class LoginComponent implements OnInit {
   public loginObj = {
-    username: "",
-    password: ""
-  }
+    username: '',
+    password: ''
+  };
   LoginForm = new FormGroup({
     username: new FormControl(),
     password: new FormControl(),
@@ -33,8 +33,8 @@ export class LoginComponent implements OnInit {
       this.Request = data;
       if (this.Request.response === 'ok') {
         // window.location.href = '/speciality';
-        // for github pages 
-        window.location.href = window.location.hostname + '/dtapi/speciality';
+        // for github pages
+        window.location.href = window.location.href + '/dtapi/speciality';
       }
     });
   }

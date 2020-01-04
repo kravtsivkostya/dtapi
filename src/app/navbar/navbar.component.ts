@@ -40,7 +40,7 @@ export class NavbarComponent implements OnInit {
     const action = 'logout';
     this.appService.getEntity(entity, action).subscribe();
     // window.location.href = '/login'
-    //for githubpages
-    window.location.href = window.location.hostname + '/dtapi/login';
+    // for githubpages
+    window.location.href = window.location.href + '/dtapi/login';
   }
 }

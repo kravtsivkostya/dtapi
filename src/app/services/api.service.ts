@@ -21,4 +21,9 @@ export class AppService {
     const url = `${this.apiURI}/${entity}/${action}/${id}`;
     return this.http.get(url);
   }
+  updEntity(entity, action, body, id) {
+    const url = `${this.apiURI}/${entity}/${action}/${id}`;
+    return this.http.post(url, body);
+  }
 }
+

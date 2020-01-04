@@ -1,6 +1,5 @@
-<form #SpecialityForm="ngForm" (ngSubmit)="createSpeciality(SpecialityForm.value)">
-
-    <div class="container">
+<div class="container">
+    <form #SpecialityForm="ngForm" (ngSubmit)="createSpeciality(SpecialityForm.value)">
         <div class="form-group">
 
             <label for="speciality_code"><b>Speciality Code</b></label>
@@ -13,25 +12,59 @@
 
             <button type="submit" class="btn btn-success btn-md">Submit</button>
         </div>
+    </form>
+
+    <div class="row ">
+        <div class="col-sm-2">
+            Code
+        </div>
+        <div class="col-sm-8">
+            Name
+        </div>
     </div>
-</form>
-<!-- <button (click) = "getSpeciality($event)">Click Me</button> -->
-<table>
-    <thead>
-        <tr>
-            <th>Desciption</th>
-            <th>Code</th>
-            <th>Name</th>
-        </tr>
-    </thead>
-    <tr *ngFor="let speciality of specialityArr">
-        <td class="td-margin">Спеціальність:</td>
-        <td class="td-margin">{{speciality.speciality_code}}</td>
-        <td class="td-margin">{{speciality.speciality_name}}</td>
-        <td>
-            <button class="btn btn-success btn-sm" title="delete speciality" (click)="delSpeciality(speciality)">
-                x
+    <div class="row" *ngFor="let speciality of specialityArr">
+        <div class="col-sm-2">
+            {{speciality.speciality_code}} </div>
+        <div class="col-sm-8">
+            {{speciality.speciality_name}} </div>
+        <div class="col-sm-1">
+            <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModal"
+                title="edit speciality" (click)="cloneEditEntity(speciality)">
+                <i class="fa fa-pencil"></i>
             </button>
-        </td>
-    </tr>
-</table>
+        </div>
+        <div class="col-sm-1">
+            <button type="button" class="btn btn-success btn-sm" title="delete speciality"
+                (click)="delSpeciality(speciality)">
+                <i class="fa fa-trash"></i>
+            </button>
+        </div>
+    </div>
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Editing Speciality</h4>
+                </div>
+                <div class="modal-body">
+                    <form #UpdateForm="ngForm" (ngSubmit)="updateSpeciality(UpdateForm.value)">
+                        <div class="form-group">
+                            <label for="speciality_code"><b>Speciality Code</b></label>
+                            <input type="text" class="form-control" placeholder="Enter Speciality Code"
+                                [(ngModel)]="object.speciality_code" name="speciality_code" required>
+                            <label for="speciality_name"><b>Speciality Name</b></label>
+                            <input type="text" class="form-control" placeholder="Enter Speciality Name"
+                                [(ngModel)]="object.speciality_name" name="speciality_name" required>
+
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-default">Update</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -13,12 +13,23 @@ export class SpecialityComponent implements OnInit {
     "speciality_code": new FormControl(),
     "speciality_name": new FormControl(),
   });
+  UpdateForm = new FormGroup({
+    "speciality_code": new FormControl(),
+    "speciality_name": new FormControl(),
+  });
   public specialityArr: Speciality[] = [];
   public entity = 'Speciality';
   public message;
+  public Request :any;
+  public object : Speciality = {
+    speciality_id: null, 
+    speciality_code: null, 
+    speciality_name: ' '
+  };
   constructor(private appService: AppService) { }
 
   ngOnInit() {
+    this.loginCheck();
     this.getSpeciality();
   }
   getSpeciality(): any {
@@ -36,4 +47,33 @@ export class SpecialityComponent implements OnInit {
     this.appService.delEntity(this.entity, action, speciality.speciality_id).subscribe(
       (data: String) => { this.message = data; { if (this.message.response === 'ok') this.specialityArr.splice(this.specialityArr.indexOf(speciality), 1) } })
   }
+  cloneEditEntity(speciality: Speciality): any {
+    // this.object.speciality_code = speciality.speciality_code;
+    // this.object.speciality_name = speciality.speciality_name;
+    // this.object.speciality_id = speciality.speciality_id;
+    this.object = {...speciality}
+  }
+  updateSpeciality(UpdateForm): any {
+    const action = 'update'
+    const body = { speciality_code: UpdateForm.speciality_code, speciality_name: UpdateForm.speciality_name };
+    this.appService.updEntity(this.entity, action, body, this.object.speciality_id).subscribe()
+    this.getSpeciality();
+  }
+  loginCheck(): any {
+    const entity = 'login';
+    const action = 'isLogged';
+    this.appService.getEntity(entity, action).subscribe((data: Object) => {
+      this.Request = data
+      console.log(this.Request);
+      if (this.Request.response == 'logged') {
+        console.log('you are logged')
+        document.getElementById('login').style.display = "none"
+        document.getElementById('logout').style.display = "block"
+      }
+      else if (this.Request.response == 'non logged') {
+        document.getElementById('login').style.display = "block"
+        document.getElementById('logout').style.display = "none"
+      }
+    })
+  };
 }

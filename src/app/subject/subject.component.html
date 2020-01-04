@@ -16,6 +16,33 @@
     </div>
 </form>
 
+<div class="row ">
+    <div class="col-sm-2">
+        Code
+    </div>
+    <div class="col-sm-8">
+        Name
+    </div>
+</div>
+<div class="row" *ngFor="let speciality of specialityArr">
+    <div class="col-sm-2">
+        {{speciality.speciality_code}} </div>
+    <div class="col-sm-8">
+        {{speciality.speciality_name}} </div>
+    <div class="col-sm-1">
+        <button type="button" class="btn btn-success btn-sm" title="edit speciality"
+            (click)="delSpeciality(speciality)">
+            <i class="fa fa-pencil"></i>
+        </button>
+    </div>
+    <div class="col-sm-1">
+        <button type="button" class="btn btn-success btn-sm" title="delete speciality"
+            (click)="delSpeciality(speciality)">
+            <i class="fa fa-trash"></i>
+        </button>
+    </div>
+</div>
+
 <table>
     <thead>
         <tr>

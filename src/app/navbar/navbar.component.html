@@ -7,15 +7,15 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
+            <li class="nav-item" id="login">
                 <a class="nav-link" routerLink='login'>Login</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" routerLink='login'>Logout</a>
+            <li class="nav-item" id="logout">
+                <a class="nav-link" type="button" (click)="logout()">Logout</a>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a class="nav-link" routerLink="subject">Subject</a>
-            </li>
+            </li> -->
             <li class="nav-item">
                 <a class="nav-link" routerLink="speciality">Speciality</a>
             </li>
